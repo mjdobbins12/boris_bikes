@@ -17,7 +17,7 @@ describe DockingStation do
   end
 
   it 'docks a bike' do
-    bike = Bike.new
+    bike = ds.release_bike
     ds.dock(bike)
     expect(ds.bikes).to include(bike)
   end
@@ -42,14 +42,14 @@ describe DockingStation do
   end
 
   it "reports a broken bike when docking" do
-    bike = Bike.new
+    bike = ds.release_bike
     ds.dock(bike, 'report')
     expect(bike.working?).to_not eq(true)
   end
 
   it "doesn't release a broken bike" do
-    ds = DockingStation.new(0)
-    bike = Bike.new.report_broken
+    ds = DockingStation.new(1)
+    bike = ds.release_bike.report_broken
     ds.dock(bike)
     expect {ds.release_bike}.to raise_error(NoMethodError)
   end
