@@ -1,9 +1,9 @@
 require_relative './bike.rb'
 
 class DockingStation
-attr_reader :bikes
-attr_reader :capacity
-DEFAULT_CAPACITY = 20
+  attr_reader :bikes
+  attr_reader :capacity
+  DEFAULT_CAPACITY = 20
   def initialize(capacity = DEFAULT_CAPACITY)
     @capacity = capacity
     @bikes = []
@@ -13,16 +13,18 @@ DEFAULT_CAPACITY = 20
   end
 
   def release_bike(index = 0)
-    if !empty? && @bikes[index].working?
+    if empty? 
+      raise ArgumentError.new('This station is empty')
+    elsif @bikes[index].working?
       bike = @bikes[index]
       @bikes.delete(bike)
       return bike
     else
-      raise ArgumentError.new('This station is empty')
+      raise RuntimeError.new('This bike is broken')
     end
   end
 
-  def dock(bike, report = 0)
+  def dock(bike, report = nil)
     bike.report_broken if report == 'report'
     return @bikes << bike if !full?
     raise ArgumentError.new('This station is full')

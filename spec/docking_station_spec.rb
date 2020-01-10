@@ -9,7 +9,9 @@ describe DockingStation do
   it { should respond_to(:bikes)}
 
   it 'releases a bike' do
-    expect(ds.release_bike).to be_instance_of(Bike)
+    bike = ds.release_bike
+    expect(bike).to be_instance_of(Bike)
+    expect(bike.working?).to eq(true)
   end
 
   it 'displays the bikes that are docked' do
