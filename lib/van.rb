@@ -15,4 +15,9 @@ class Van
 		end
 		docking_station.bikes.delete_if{ |bike| bike.working? == false }
 	end
+	
+	def deliver_broken_bikes(garage)
+		garage.bikes << @bikes
+		@bikes = []
+	end
 end
