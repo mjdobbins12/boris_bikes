@@ -29,6 +29,9 @@ class DockingStation
     return (@bikes << bike) if !full?
     raise ArgumentError.new('This station is full')
   end
+  
+  def release_for_repair
+  end
 
   private
   def full?
