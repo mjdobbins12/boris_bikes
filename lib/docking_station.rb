@@ -26,7 +26,7 @@ class DockingStation
 
   def dock(bike, report = nil)
     bike.report_broken if report == 'report'
-    return @bikes << bike if !full?
+    return (@bikes << bike) if !full?
     raise ArgumentError.new('This station is full')
   end
 
